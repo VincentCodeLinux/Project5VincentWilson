@@ -44,7 +44,7 @@ for chosenjob in data:
     salary_diff = chosenjob["ave_annual_salary"] - chosenjob["median_annual_salary"] #Difference in average/median salary variable
     percent_diff = round((salary_diff / chosenjob["median_annual_salary"]) * 100, 3) #Percentage difference variable pulling from salary_diff variable divided ny median salary of job chosen
     if chosenjob["job_class"] in jobs_offered:
-        if jobs_offered[chosenjob["job_class"]] >= job_input:
+        if jobs_offered[chosenjob["job_class"]] == job_input:
             if chosenjob["starting_salary"] >= salary_input: #This checks if the salary is within range of what the user inputted
                 print("The job above the salary you asked for")
                 print()
@@ -79,14 +79,14 @@ for chosenjob in data:
                 print(Back.RED + Style.BRIGHT + f"The top salary for the job is {chosenjob['top_salary']} which is greater than the starting salary you inputed")
                 print(Style.RESET_ALL)
 
-input("Press Enter/Return to see the skills needed for the job you choose")
-count = 0 #Sets the variable of count to 0
+input("Press Enter/Return to see skills needed for the job you chose")
+count = 0 # Sets the variable of count to 0
 for chosenjob in data:
-    if chosenjob["job_class"] in jobs_offered:
-        if jobs_offered[chosenjob["job_class"]] >= job_input:
-            skills = chosenjob['needed_skills'] #This is setting the skill variable to the needed skills listed in the job chosen
-            for skill in skills: #This is checking skill within skills variable that was set in the previous line and is within the other for loop
-                print(skill['skill']) #prints skills
-                count += 1 #Adds to the count variable
-                if count % 30 == 0: #Checks to see how many skills it has looped through to try and see if it should end or not
-                    input("Press Enter/Return to see more skills needed for the job you choose")
+        if chosenjob["job_class"] in jobs_offered:
+            if jobs_offered[chosenjob["job_class"]] == job_input: #Checking to see the job that was input according to the job map
+                if "needed_skills" in chosenjob: #Using if in seeing the skills in the job that was chosen
+                    for skill in chosenjob['needed_skills']:
+                        print(skill['skill']) #Prints the skills
+                        count += 1 # Adds to the count variable
+                        if count % 30 == 0: # Checks to see how many skills it has looped through to try and see if it should end or not
+                            input("Press Enter/Return to see more skills needed for the job you chose")
